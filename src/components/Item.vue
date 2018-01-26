@@ -1,5 +1,5 @@
 <template>
-  <input v-bind:type="item.type"/>
+  <input v-bind:type="item.type" v-model="model"/>
 </template>
 
 <script>
@@ -7,6 +7,7 @@ export default {
   data () {
     return {}
   },
-  props: ['item']
+  props: ['item', 'model'],
+  mounted () {}
 }
 </script>

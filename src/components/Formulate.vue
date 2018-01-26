@@ -1,21 +1,25 @@
 <template>
   <div>
-    <template v-for="(item,index) in structure">
-      <formulate-object v-if="item.type==='object'" :object="item" v-bind:key="index"/>
-      <item v-else :item="item" v-bind:key="index"/>
+    <template v-for="(struct,index) in structure">
+      <formulate v-if="struct.type==='object'" :structure="struct.structure" :model="model[struct.key]" :key="index"/>
+      <item v-else-if="struct.type!=='object'" :item="struct" :model="model[struct.key]" :key="index"/>
     </template>
   </div>
 </template>
 
 <script>
-import Object from './Object'
+import Formulate from '@/components/Formulate'
 import Item from './Item'
 
 export default {
-  components: {'formulate-object': Object, 'item': Item},
+  name: 'formulate',
+  components: {'formulate': Formulate, 'item': Item},
   data () {
     return {}
   },
-  props: ['structure']
+  mounted () {
+    if (!this.model) console.log('Inconsistent structure.key to model.key relationship')
+  },
+  props: ['structure', 'model']
 }
 </script>

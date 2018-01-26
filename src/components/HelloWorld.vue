@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-      <formulate :structure="structure"></formulate>
+      <formulate :structure="structure" :model="model"/>
   </div>
 </template>
 
@@ -9,24 +9,48 @@
 import Formulate from './Formulate'
 
 export default {
-  name: 'HelloWorld',
   components: {'formulate': Formulate},
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      msg: 'Vue Formulate',
       structure: [
-        {type: 'text'},
-        {type: 'datetime-local'},
-        {type: 'number'},
+        {type: 'text', key: 'name'},
+        {type: 'number', key: 'age'},
+        {type: 'datetime-local', key: 'birthday'},
         {
           type: 'object',
+          key: 'fiance',
           structure: [
-            {type: 'text'},
-            {type: 'datetime-local'},
-            {type: 'number'}
+            {type: 'text', key: 'name'},
+            {type: 'number', key: 'age'},
+            {type: 'datetime-local', key: 'birthday'},
+            {
+              type: 'object',
+              key: 'school',
+              structure: [
+                {type: 'text', key: 'name'},
+                {type: 'text', key: 'city'},
+                {type: 'datetime-local', key: 'date_of_enrollment'}
+              ]
+            }
           ]
         }
-      ]
+      ],
+      model: {
+        name: 'Eric',
+        age: 24,
+        birthday: 'October 17, 1993',
+        fiance: {
+          name: 'Rachel',
+          age: 22,
+          birthday: 'December 22, 1995',
+          school: {
+            name: 'Tyndale',
+            city: 'Toronto',
+            date_of_enrollment: 'September 5, 2013'
+          }
+        }
+      }
     }
   }
 }
